@@ -1,0 +1,12 @@
+{% extends "admin/change_list.html" %}
+{% load static %}
+
+{% block object-tools-items %}
+    {{ block.super }}
+    <li>
+        <a href="{% url 'admin:theming_theme_selector' %}" class="addlink" style="background-color: #007cba; color: white; padding: 10px 15px; border-radius: 4px; text-decoration: none; display: inline-block;">
+            🎨 Theme Selector
+        </a>
+    </li>
+{% endblock %}
+

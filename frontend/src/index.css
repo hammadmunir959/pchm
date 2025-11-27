@@ -1,0 +1,358 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* THICCCBOI Font Face Declarations */
+@font-face {
+  font-family: 'THICCCBOI';
+  src: url('/fonts/thicccboi/fonts/Webfont/THICCCBOI-Thin.woff2') format('woff2');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'THICCCBOI';
+  src: url('/fonts/thicccboi/fonts/Webfont/THICCCBOI-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'THICCCBOI';
+  src: url('/fonts/thicccboi/fonts/Webfont/THICCCBOI-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'THICCCBOI';
+  src: url('/fonts/thicccboi/fonts/Webfont/THICCCBOI-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'THICCCBOI';
+  src: url('/fonts/thicccboi/fonts/Webfont/THICCCBOI-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'THICCCBOI';
+  src: url('/fonts/thicccboi/fonts/Webfont/THICCCBOI-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'THICCCBOI';
+  src: url('/fonts/thicccboi/fonts/Webfont/THICCCBOI-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'THICCCBOI';
+  src: url('/fonts/thicccboi/fonts/Webfont/THICCCBOI-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'THICCCBOI';
+  src: url('/fonts/thicccboi/fonts/Webfont/THICCCBOI-ThicccAF.woff2') format('woff2');
+  font-weight: 950;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+
+   /* Make primary a light/white surface by default so components using
+     bg-primary become white with dark text (light theme). */
+   --primary: 0 0% 100%;
+   --primary-foreground: 0 0% 0%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 0%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 43 70% 52%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 43 70% 52%;
+
+    --radius: 0.5rem;
+
+    --gold: 43 70% 52%;
+    --gold-light: 43 70% 65%;
+    --grey-light: 0 0% 96%;
+    
+    --shadow-elegant: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Chart colors for light mode */
+    --chart-1: 221 83% 53%;
+    --chart-2: 142 76% 36%;
+    --chart-3: 346 77% 50%;
+    --chart-4: 199 89% 48%;
+    
+    /* Theme colors (default values, overridden by theme system) */
+    --theme-primary: #0b5cff;
+    --theme-secondary: #00d4ff;
+    --theme-background: '';
+    --theme-text: '';
+    --theme-accent: '';
+  }
+
+  .dark {
+    /* Dark mode values: make primary a dark surface in dark mode */
+    --background: 0 0% 5%;
+    --foreground: 0 0% 100%;
+
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 100%;
+
+    /* In dark mode primary becomes dark (black) and text becomes light */
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 43 70% 52%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 43 70% 52%;
+    
+    /* Chart colors for dark mode - brighter for visibility */
+    --chart-1: 217 91% 60%;
+    --chart-2: 142 70% 45%;
+    --chart-3: 346 77% 50%;
+    --chart-4: 199 89% 48%;
+  }
+
+  /* Theme overrides - apply theme colors when set */
+  :root:has([data-theme-active]) {
+    --background: var(--theme-background-hsl, var(--background));
+    --foreground: var(--theme-text-hsl, var(--foreground));
+  }
+
+  .dark:has([data-theme-active]) {
+    --background: var(--theme-background-hsl, var(--background));
+    --foreground: var(--theme-text-hsl, var(--foreground));
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Theme colors override default colors for light mode only - but NOT in admin area */
+  /* In dark mode, we don't apply theme colors to allow proper dark mode styling */
+  :root:not(.dark) body[data-theme-active="true"]:not(:has([data-admin-area])) {
+    background-color: var(--theme-background) !important;
+    color: var(--theme-text) !important;
+  }
+
+  /* Ensure components respect theme colors in light mode only - exclude admin area */
+  :root:not(.dark) body[data-theme-active="true"]:not(:has([data-admin-area])) .bg-background {
+    background-color: var(--theme-background) !important;
+  }
+
+  :root:not(.dark) body[data-theme-active="true"]:not(:has([data-admin-area])) .text-foreground {
+    color: var(--theme-text) !important;
+  }
+
+  :root:not(.dark) body[data-theme-active="true"]:not(:has([data-admin-area])) .text-muted-foreground {
+    color: var(--theme-text) !important;
+    opacity: 0.7;
+  }
+  
+  /* In dark mode, ensure proper dark mode colors are used and theme colors don't override */
+  :root.dark body:not(:has([data-admin-area])) {
+    background-color: hsl(var(--background)) !important;
+    color: hsl(var(--foreground)) !important;
+  }
+  
+  :root.dark body:not(:has([data-admin-area])) .bg-background {
+    background-color: hsl(var(--background)) !important;
+  }
+  
+  :root.dark body:not(:has([data-admin-area])) .text-foreground {
+    color: hsl(var(--foreground)) !important;
+  }
+  
+  :root.dark body:not(:has([data-admin-area])) .text-muted-foreground {
+    color: hsl(var(--muted-foreground)) !important;
+  }
+
+  /* Admin area should always use standard colors for proper visibility in both light and dark modes */
+  /* Override any theme colors when admin area is present */
+  body:has([data-admin-area]),
+  [data-admin-area] {
+    background-color: hsl(var(--background)) !important;
+    color: hsl(var(--foreground)) !important;
+  }
+
+  /* Ensure all text and components in admin area use standard colors */
+  [data-admin-area] .text-foreground {
+    color: hsl(var(--foreground)) !important;
+  }
+
+  [data-admin-area] .text-muted-foreground {
+    color: hsl(var(--muted-foreground)) !important;
+  }
+
+  [data-admin-area] .bg-background {
+    background-color: hsl(var(--background)) !important;
+  }
+
+  [data-admin-area] .bg-card {
+    background-color: hsl(var(--card)) !important;
+  }
+
+  [data-admin-area] .card {
+    background-color: hsl(var(--card)) !important;
+    color: hsl(var(--card-foreground)) !important;
+  }
+
+  [data-admin-area] header,
+  [data-admin-area] nav,
+  [data-admin-area] footer {
+    background-color: hsl(var(--background)) !important;
+    color: hsl(var(--foreground)) !important;
+  }
+
+  /* Ensure borders and inputs are visible in admin area */
+  [data-admin-area] .border-border {
+    border-color: hsl(var(--border)) !important;
+  }
+
+  [data-admin-area] input,
+  [data-admin-area] textarea,
+  [data-admin-area] select {
+    background-color: hsl(var(--background)) !important;
+    color: hsl(var(--foreground)) !important;
+    border-color: hsl(var(--border)) !important;
+  }
+
+  [data-admin-area] button {
+    color: hsl(var(--foreground)) !important;
+  }
+
+  /* Ensure proper contrast for admin dashboard components */
+  [data-admin-area] .bg-primary {
+    background-color: hsl(var(--primary)) !important;
+  }
+
+  [data-admin-area] .text-primary {
+    color: hsl(var(--primary-foreground)) !important;
+  }
+}
+
+/* Custom animations for page load entrance effects */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@layer utilities {
+  .animate-fadeInUp {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .animate-slideInLeft {
+    animation: slideInLeft 0.8s ease-out forwards;
+  }
+}
+.dark .article-body,
+.dark .article-body * {
+  color: hsl(var(--foreground)) !important;
+}
+.dark .article-body a {
+  color: hsl(var(--accent)) !important;
+}
+.progress-circle {
+  display: block;
+  margin: auto;
+}
+
+.svg-content path {
+  stroke-linecap: round;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to our Newsletter</title>
+    <style>
+      body { font-family: Arial, Helvetica, sans-serif; color: #111; }
+      .container { max-width: 640px; margin: 0 auto; padding: 16px; }
+      .footer { margin-top: 24px; font-size: 12px; color: #666; border-top: 1px solid #eee; padding-top: 12px; }
+      a { color: #2563eb; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Welcome{% if name %}, {{ name }}{% endif %} to Prestige Car Hire Newsletter</h2>
+      <p>Thanks for subscribing with {{ email }}. We’ll keep you updated with news, insights, and priority access to our replacement vehicle fleet.</p>
+      <p>If this wasn’t you or you no longer want to receive these emails, you can unsubscribe at any time using the link below.</p>
+      <div class="footer">
+        <p>
+          You are receiving this email because you subscribed on our website.
+          <br />
+          <a href="/unsubscribe?email={{ email }}">Unsubscribe</a>
+        </p>
+        <p>Prestige Car Hire Management LTD</p>
+      </div>
+    </div>
+  </body>
+  </html>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Our Newsletter</title>
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
+    <div style="text-align: center; margin-bottom: 30px;">
+        <h1 style="color: #2c3e50; margin-bottom: 10px;">Welcome to Prestige Car Hire Management</h1>
+        <p style="font-size: 16px; color: #7f8c8d;">Thank you for subscribing to our newsletter!</p>
+    </div>
+
+    <div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin-bottom: 20px;">
+        <h2 style="color: #2c3e50; margin-top: 0;">Hello {{ name }}!</h2>
+        <p>Thank you for subscribing to our newsletter. You're now part of our community and will receive regular updates about:</p>
+        <ul style="padding-left: 20px;">
+            <li>New vehicle additions to our fleet</li>
+            <li>Special offers and promotions</li>
+            <li>Car sales and purchase opportunities</li>
+            <li>Insurance claim tips and updates</li>
+            <li>Company news and announcements</li>
+        </ul>
+    </div>
+
+    <div style="margin-bottom: 30px;">
+        <h3 style="color: #2c3e50;">What to expect:</h3>
+        <p>We send newsletters approximately once per month, but you might receive occasional important updates more frequently. We respect your inbox and will never share your email address with third parties.</p>
+    </div>
+
+    <div style="background-color: #e8f5e8; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+        <p style="margin: 0;"><strong>Unsubscribe anytime:</strong> If you ever wish to stop receiving our newsletters, you can unsubscribe instantly by clicking the unsubscribe link at the bottom of any email.</p>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee;">
+        <p style="color: #7f8c8d; font-size: 14px;">Best regards,<br>The Prestige Car Hire Management Team</p>
+        <p style="color: #7f8c8d; font-size: 12px; margin-top: 20px;">
+            You received this email because you subscribed to our newsletter at {{ email }}.
+            If you didn't subscribe, please ignore this email.
+        </p>
+    </div>
+</body>
+</html>

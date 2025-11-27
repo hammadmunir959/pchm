@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>We received your purchase request</title>
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <div style="max-width: 640px; margin: 0 auto; padding: 20px;">
+        <h2 style="color: #2c3e50;">Thanks for your interest!</h2>
+        <p>Hello {{ request.name }},</p>
+        <p>We have received your purchase request for <strong>{{ request.car_listing }}</strong>. Our team will review the details and contact you shortly.</p>
+
+        <h3>Your Request Summary</h3>
+        <ul>
+            <li><strong>Vehicle:</strong> {{ request.car_listing }}</li>
+            <li><strong>Offer Price:</strong> {{ request.offer_price|default:"Not provided" }}</li>
+            <li><strong>Financing Required:</strong> {{ request.financing_required|yesno:"Yes,No" }}</li>
+            <li><strong>Trade-in Details:</strong> {{ request.trade_in_details|default:"Not provided" }}</li>
+        </ul>
+
+        <p>If you need immediate assistance, please reply to this email or call our support team.</p>
+
+        <p style="margin-top: 30px;">Best regards,<br>{{ site_name }} Team</p>
+    </div>
+</body>
+</html>
+

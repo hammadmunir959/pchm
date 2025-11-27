@@ -1,0 +1,36 @@
+# Multi-stage build for React frontend (build-only)
+# This Dockerfile builds the frontend and outputs to a volume
+# The built files will be copied to backend/frontend_dist
+
+FROM node:20-alpine as builder
+
+WORKDIR /app
+
+# Copy package files
+COPY frontend/package.json frontend/package-lock.json* frontend/bun.lockb* ./
+
+# Install dependencies
+# Use npm if package-lock.json exists, otherwise bun
+RUN if [ -f package-lock.json ]; then \
+        npm ci --legacy-peer-deps; \
+    elif [ -f bun.lockb ]; then \
+        npm install -g bun && bun install; \
+    else \
+        npm install --legacy-peer-deps; \
+    fi
+
+# Copy frontend source
+COPY frontend/ ./
+
+# Build arguments for environment variables
+ARG VITE_API_URL
+ENV VITE_API_URL=${VITE_API_URL:-http://localhost:8000}
+
+# Build frontend
+# The build output will go to ../backend/frontend_dist as configured in vite.config.ts
+RUN npm run build
+
+# Output stage - copy the dist folder to a known location
+FROM scratch as output
+COPY --from=builder /app/dist /
+

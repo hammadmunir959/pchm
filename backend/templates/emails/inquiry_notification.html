@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>New Inquiry Received</title>
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+        <h2>New Inquiry Alert</h2>
+        <p>A new inquiry was submitted on {{ site_name }}.</p>
+        <p><strong>Name:</strong> {{ inquiry.name }}</p>
+        <p><strong>Email:</strong> {{ inquiry.email }}</p>
+        {% if inquiry.phone %}<p><strong>Phone:</strong> {{ inquiry.phone }}</p>{% endif %}
+        <p><strong>Subject:</strong> {{ inquiry.subject }}</p>
+        {% if inquiry.vehicle_interest %}<p><strong>Vehicle Interest:</strong> {{ inquiry.vehicle_interest }}</p>{% endif %}
+        <p><strong>Message:</strong></p>
+        <div style="background-color: #f8f9fa; padding: 15px; white-space: pre-line; border-radius: 6px;">
+            {{ inquiry.message }}
+        </div>
+        <p>Please follow up with the customer at your earliest convenience.</p>
+        <p>– {{ site_name }} Notifications</p>
+    </div>
+</body>
+</html>
+

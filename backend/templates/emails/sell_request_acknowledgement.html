@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>We received your sell request</title>
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <div style="max-width: 640px; margin: 0 auto; padding: 20px;">
+        <h2 style="color: #2c3e50;">Thanks for your interest!</h2>
+        <p>Hello {{ request.name }},</p>
+        <p>We have received your request to sell your <strong>{{ request.vehicle_make }} {{ request.vehicle_model }}</strong>. Our team will review the details and contact you shortly.</p>
+
+        <h3>Your Request Summary</h3>
+        <ul>
+            <li><strong>Vehicle:</strong> {{ request.vehicle_make }} {{ request.vehicle_model }}</li>
+            <li><strong>Year:</strong> {{ request.vehicle_year|default:"Not provided" }}</li>
+            <li><strong>Mileage:</strong> {{ request.mileage|default:"Not provided" }}</li>
+        </ul>
+
+        <p>If you need immediate assistance, please reply to this email{% if request.phone %} or call us at {{ request.phone }}{% endif %}.</p>
+
+        <p style="margin-top: 30px;">Best regards,<br>{{ site_name }} Team</p>
+    </div>
+</body>
+</html>
+
