@@ -20,6 +20,141 @@ import { useToast } from "@/hooks/use-toast";
 import { carSalesApi, type CarListing, type SellRequestPayload } from "@/services/carSalesApi";
 import { Label } from "@/components/ui/label";
 
+const fallbackListings: CarListing[] = [
+  {
+    id: 1,
+    make: "BMW",
+    model: "5 Series",
+    year: 2021,
+    mileage: 25000,
+    color: "Black",
+    registration: "BM21 XYZ",
+    price: "28950",
+    fuel_type: "petrol",
+    transmission: "automatic",
+    engine_size: "2.0L",
+    doors: 4,
+    seats: 5,
+    description: "Luxury executive saloon with premium features. One owner, full service history.",
+    features: ["Leather Seats", "Navigation", "Parking Sensors"],
+    condition: "excellent",
+    location: "London",
+    status: "published",
+    featured: true,
+    primary_image: encodeURI("/BMW 5 Series.jpg"),
+  },
+  {
+    id: 2,
+    make: "Mercedes-Benz",
+    model: "E-Class",
+    year: 2020,
+    mileage: 32000,
+    color: "Silver",
+    registration: "ME20 ABC",
+    price: "27500",
+    fuel_type: "diesel",
+    transmission: "automatic",
+    engine_size: "2.0L",
+    doors: 4,
+    seats: 5,
+    description: "Premium executive car with advanced safety features and comfortable interior.",
+    features: ["Panoramic Roof", "Premium Sound", "Adaptive Cruise"],
+    condition: "excellent",
+    location: "Manchester",
+    status: "published",
+    featured: false,
+    primary_image: encodeURI("/Mercedes V-Class.jpg"),
+  },
+  {
+    id: 3,
+    make: "Audi",
+    model: "A4",
+    year: 2022,
+    mileage: 18000,
+    color: "White",
+    registration: "AU22 DEF",
+    price: "31900",
+    fuel_type: "petrol",
+    transmission: "automatic",
+    engine_size: "2.0L",
+    doors: 4,
+    seats: 5,
+    description: "Modern luxury sedan with cutting-edge technology and sporty design.",
+    features: ["Virtual Cockpit", "Matrix LED", "Quattro AWD"],
+    condition: "excellent",
+    location: "Birmingham",
+    status: "published",
+    featured: true,
+    primary_image: encodeURI("/Toyota Corolla.jpg"),
+  },
+  {
+    id: 4,
+    make: "Tesla",
+    model: "Model 3",
+    year: 2023,
+    mileage: 12000,
+    color: "Red",
+    registration: "TE23 GHI",
+    price: "34900",
+    fuel_type: "electric",
+    transmission: "automatic",
+    engine_size: "Electric",
+    doors: 4,
+    seats: 5,
+    description: "Premium electric vehicle with autopilot capabilities and long range.",
+    features: ["Autopilot", "Supercharging", "Premium Interior"],
+    condition: "excellent",
+    location: "Bristol",
+    status: "published",
+    featured: false,
+    primary_image: encodeURI("/Tesla Model 3.jpg"),
+  },
+  {
+    id: 5,
+    make: "Volkswagen",
+    model: "Golf",
+    year: 2021,
+    mileage: 28000,
+    color: "Blue",
+    registration: "VG21 JKL",
+    price: "19950",
+    fuel_type: "petrol",
+    transmission: "manual",
+    engine_size: "1.5L",
+    doors: 5,
+    seats: 5,
+    description: "Reliable and efficient hatchback perfect for city driving and long journeys.",
+    features: ["Apple CarPlay", "Parking Assist", "LED Lights"],
+    condition: "very good",
+    location: "Leeds",
+    status: "published",
+    featured: false,
+    primary_image: encodeURI("/Volkswagen Transporter.png"),
+  },
+  {
+    id: 6,
+    make: "Ford",
+    model: "Explorer",
+    year: 2020,
+    mileage: 35000,
+    color: "Grey",
+    registration: "FO20 MNO",
+    price: "24500",
+    fuel_type: "petrol",
+    transmission: "automatic",
+    engine_size: "2.3L",
+    doors: 5,
+    seats: 7,
+    description: "Spacious SUV ideal for families with plenty of room and modern features.",
+    features: ["7 Seats", "All-Wheel Drive", "SYNC 3"],
+    condition: "very good",
+    location: "Liverpool",
+    status: "published",
+    featured: false,
+    primary_image: encodeURI("/Ford Explorer.jpg"),
+  },
+];
+
 const fuelFilters = [
   { value: "all", label: "All fuel types" },
   { value: "petrol", label: "Petrol" },
@@ -36,7 +171,7 @@ const transmissionFilters = [
 
 const CarSales = () => {
   const { toast } = useToast();
-  const [listings, setListings] = useState<CarListing[]>([]);
+  const [listings, setListings] = useState<CarListing[]>(fallbackListings);
   const [loading, setLoading] = useState(true);
   const [selectedListing, setSelectedListing] = useState<CarListing | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -64,13 +199,18 @@ const CarSales = () => {
       setLoading(true);
       try {
         const data = await carSalesApi.list({ status: "published" });
-        setListings(data);
+        if (data.length === 0) {
+          setListings(fallbackListings);
+        } else {
+          setListings(data);
+        }
       } catch (error) {
         toast({
           title: "Unable to load vehicles",
           description: error instanceof Error ? error.message : "Please try again later.",
           variant: "destructive",
         });
+        setListings(fallbackListings);
       } finally {
         setLoading(false);
       }
@@ -299,12 +439,11 @@ const CarSales = () => {
           </AnimatedSection>
 
           {/* Carousel Section */}
-          {!loading && filteredListings.length > 0 && (
-            <AnimatedSection delay={150}>
-              <section className="relative mx-auto h-[calc(100vh-200px)] w-full max-w-7xl mb-16">
-                <div className="absolute inset-0 overflow-hidden rounded-3xl border border-border bg-card shadow-2xl transition-colors" ref={emblaRef}>
-                  <div className="flex h-full">
-                    {filteredListings.map((listing) => (
+          <AnimatedSection delay={150}>
+            <section className="relative mx-auto h-[calc(100vh-200px)] w-full max-w-7xl mb-16">
+              <div className="absolute inset-0 overflow-hidden rounded-3xl border border-border bg-card shadow-2xl transition-colors" ref={emblaRef}>
+                <div className="flex h-full">
+                  {(loading ? fallbackListings : (listings.length > 0 ? listings : fallbackListings)).map((listing) => (
                       <article
                         key={listing.id}
                         className="relative min-w-full h-full group"
@@ -393,7 +532,6 @@ const CarSales = () => {
                 </button>
               </section>
             </AnimatedSection>
-          )}
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
